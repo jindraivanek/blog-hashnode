@@ -7,31 +7,29 @@ tags: docker, f, deploy, cicd, safe
 
 ---
 
----
-title: Continuous deployment of SAFE apps on linux server
-tags: 
-  - F#
-  - SAFE
-  - linux
-  - deploy
----
+For some time I was looking for a solution for how to do continuous deployment of my [SAFE stack](https://safe-stack.github.io/docs/) projects to the server. My needs are:
 
-For some time I was looking for solution how to do continuous deployment of my [SAFE stack](https://safe-stack.github.io/docs/) projects to server. My needs are:
-
-* automagically deploy new version after *push* to master branch
+* automagically deploy a new version after *push* to master branch
+    
 * support multiple apps on one server with different URLs (`server.com/app1`, `server.com/app2`)
+    
 
 My final solution consists of:
 
-* build as Docker image
-* GitLab CI / CD for build image and push it to registry
+* build as a Docker image
+    
+* GitLab CI / CD for building image and push it to the registry
+    
 * Watchtower - docker app for automatically updating to new version of docker images
+    
 * Nginx - reverse proxy for serving multiple apps
+    
 
 ## Repository side
 
 ### Full build with Docker
-Following 2-phase Dockerfile do full build of SAFE app and run it.
+
+Following 2-phase Dockerfile do a full build of SAFE app and run it.
 
 ```docker
 FROM vbfox/fable-build:stretch AS builder
@@ -72,7 +70,8 @@ ENTRYPOINT ["dotnet", "Server.dll"]
 ```
 
 ### Gitlab CI / CD and docker registry
-This `.gitlab-ci.yml` config builds the docker image using above Dockerfile, and pushes it to built-in [Docker container registry](https://gitlab.com/help/user/project/container_registry). Docker image adress will be `registry.gitlab.com/<user-name>/<repo-name>:<branch-name>`.
+
+This `.gitlab-ci.yml` config builds the docker image using the above Dockerfile, and pushes it to the built-in [Docker container registry](https://gitlab.com/help/user/project/container_registry). Docker image address will be `registry.gitlab.com/<user-name>/<repo-name>:<branch-name>`.
 
 ```yml
 image: docker:stable
@@ -98,24 +97,28 @@ build:
 ## Server side
 
 ### Docker run options
-On my server, I am using the following command to run docker image:
-`docker run -p <port>:8085 --restart unless-stopped --name <name> -d <docker-image>`
 
-For each app I am using different port.
+On my server, I am using the following command to run the docker image: `docker run -p <port>:8085 --restart unless-stopped --name <name> -d <docker-image>`
+
+For each app, I am using a different port.
 
 ### Watchtower
+
 [Watchtower](https://github.com/v2tec/watchtower) is a great docker app that watches over your other running docker images, and when a new version is uploaded, that docker image is updated and restarted.
 
 Using watchtower is simple, just run once:
-```
+
+```bash
 docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock --restart unless-stopped v2tec/watchtower
 ```
 
-### Multiple application on one server with Nginx
-Each app running on different port can be mapped to url using [reverse proxy with Nginx](https://www.keycdn.com/support/nginx-reverse-proxy). My configuration may look like this:
+### Multiple applications on one server with Nginx
+
+Each app running on a different port can be mapped to url using [reverse proxy with Nginx](https://www.keycdn.com/support/nginx-reverse-proxy). My configuration may look like this:
 
 `/etc/nginx/sites-enabled/reverse-proxy`
-```
+
+```bash
 server {
         listen 80;
         location /app1/ {
@@ -133,12 +136,14 @@ server {
 }
 ```
 
-I used two entries for each app, one for main app site, the second for api that SAFE uses for communication between its client and server part. This way app works in local and production environment.
+I used two entries for each app, one for the main app site, and the second for API that SAFE uses for communication between its client and server part. This way the app works in local and production environments.
 
 ## End note
-A sample of working repository with my setup can be found here: [safe-template](https://gitlab.com/jindraivanek/safe-template).
+
+A sample of the working repository with my setup can be found here: [safe-template](https://gitlab.com/jindraivanek/safe-template).
 
 At the moment, I am using this pipeline for 2 projects now:
 
 * [CHMU-air](http://ratatosk.dynu.net/chmu-air)
+    
 * [Fantomas online](http://ratatosk.dynu.net/fantomas)
