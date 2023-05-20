@@ -46,3 +46,6 @@ tags: tutorial, f, fake
 * When you change dependencies, you need to delete `script.fsx.lock` file, to force FAKE to recompute dependencies.
     
 * If you run into some problems, try removing `.fake/script.fsx` folder.
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1684564079951/2f59fb53-7d56-4bbb-9f7c-7ba7b85ee847.png align="center")
