@@ -2,7 +2,7 @@
 title: "My F# space adventure"
 datePublished: Wed Dec 26 2018 20:20:20 GMT+0000 (Coordinated Universal Time)
 cuid: clhz8ilei00020amjbixec2de
-slug: my-f-space-adventure
+slug: my-fsharp-space-adventure
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1684817651945/e18791b7-a17e-47ab-9c9d-ddefe6fda0be.jpeg
 ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1684783188268/b12a8ed5-062c-416f-b8b6-859db1712005.jpeg
 tags: data-science, f, space
