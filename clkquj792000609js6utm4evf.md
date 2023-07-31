@@ -23,7 +23,7 @@ Let's look at this problem in more detail.
 
 ## Benchmarking
 
-Comparing `exists` and `contains` function on lists of `int`, `string` and `record` with .NET Benchmark library we get:
+Comparing `exists` and `contains` function on lists of `int`, `string` and `record` with [Benchmark.NET](https://github.com/dotnet/BenchmarkDotNet) library we get:
 
 | Method | Mean | Error | StdDev | Gen0 | Allocated |
 | --- | --- | --- | --- | --- | --- |
