@@ -4,7 +4,7 @@ datePublished: Mon Jul 31 2023 12:28:17 GMT+0000 (Coordinated Universal Time)
 cuid: clkquj792000609js6utm4evf
 slug: curious-case-of-listcontains-performance
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1690790755399/48fcdf86-7253-4891-8503-06ea6651d9ce.png
-tags: performance, compiler, fsharp
+tags: performance, f, compiler, fsharp
 
 ---
 
