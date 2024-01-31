@@ -11,8 +11,8 @@ tags: tips, dotnet, fsharp, discriminated-union-types
 Single-case discriminated unions are a great way to avoid *primitive obsession*.
 
 <div data-node-type="callout">
-  <div data-node-type="callout-emoji">💡</div>
-  <div data-node-type="callout-text"><strong>Primitive obsession</strong> is an anti-pattern where primitive types are used too much in places where a custom type would be a better fit. By using custom types or wrapper types, we can catch more potential bugs.</div>
+<div data-node-type="callout-emoji">💡</div>
+<div data-node-type="callout-text"><strong>Primitive obsession</strong> is an anti-pattern where primitive types are used too much in places where a custom type would be a better fit. By using custom types or wrapper types, we can catch more potential bugs.</div>
 </div>
 
 We can create a new type that simply wraps the value of another (typically primitive) type. In F#, this is a simple one-liner:
@@ -63,6 +63,17 @@ with member this.Value = let (ItemId value) = this in value
 ```
 
 Then we can use <kbd>itemId.Value</kbd>.
+
+<div data-node-type="callout">
+<div data-node-type="callout-emoji">💡</div>
+<div data-node-type="callout-text">The <code>in</code> keyword is shorthand syntax for writing <code>let</code> binding and following expression in one line. Learn more on <a target="_blank" rel="noopener noreferrer nofollow" href="https://fsharpforfunandprofit.com/posts/let-use-do/#nested-let-bindings-as-expressions" style="pointer-events: none">fsharpforfunandprofit</a>.</div>
+</div>
+
+```plaintext
+member this.Value = 
+    let (ItemId value) = this
+    value
+```
 
 ---
 
