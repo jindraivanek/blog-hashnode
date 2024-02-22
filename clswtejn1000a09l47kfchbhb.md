@@ -1,5 +1,5 @@
 ---
-title: "# F# tips weekly #7: Custom equality and comparison (1)"
+title: "F# tips weekly #7: Custom equality and comparison (1)"
 datePublished: Thu Feb 22 2024 06:00:56 GMT+0000 (Coordinated Universal Time)
 cuid: clswtejn1000a09l47kfchbhb
 slug: f-tips-weekly-7-custom-equality-and-comparison-1
